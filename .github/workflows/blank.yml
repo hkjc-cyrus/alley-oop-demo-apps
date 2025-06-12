@@ -41,6 +41,6 @@ jobs:
           JFROG_KOLTIN_TOKEN: ${{ secrets.JFROG_KOLTIN_TOKEN }}
         run: |
           curl -fL https://getcli.jfrog.io | sh
-          ./jfrog rt c default --url=$JFROG_URL--user=$JFROG_USERNAME --token=$JFROG_KOLTIN_TOKEN
+          ./jfrog rt c default --url=$JFROG_URL --user=$JFROG_USERNAME --token=$JFROG_KOLTIN_TOKEN
           ./jfrog rt u build/libs/*.jar $JFROG_REPO/$JFROG_ARTIFACT_PATH
           ./jfrog rt u Dockerfile $JFROG_REPO/$JFROG_DOCKER_PATH
