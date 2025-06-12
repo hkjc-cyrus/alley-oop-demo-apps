@@ -32,15 +32,14 @@ jobs:
           ./gradlew clean build
 
       - name: upload artifact to JFrog
+        uses: jfrog/setup-jfrog-cli@v4
         env:
+          JF_URL: https://alleyoopsanbox.jfrog.io 
           JFROG_URL: https://alleyoopsandbox.jfrog.io
           JFROG_REPO: artifactory
           JFROG_ARTIFACT_PATH: aop-cicd-kotlin/demo-1.0.0.jar
           JFROG_DOCKER_PATH: aop-cicd-kotlin/Dockerfile
           JFROG_USERNAME: cyrus.kc.cheng@hkjc.org.hk
           JFROG_KOLTIN_TOKEN: ${{ secrets.JFROG_KOLTIN_TOKEN }}
-        run: |
-          curl -fL https://getcli.jfrog.io | sh
-          ./jfrog rt c default --url=$JFROG_URL --user=$JFROG_USERNAME --access-token=$JFROG_KOLTIN_TOKEN
-          ./jfrog rt u build/libs/*.jar $JFROG_REPO/$JFROG_ARTIFACT_PATH
-          ./jfrog rt u Dockerfile $JFROG_REPO/$JFROG_DOCKER_PATH
+        with:
+          oidc-provider-name: jfrog-github 
