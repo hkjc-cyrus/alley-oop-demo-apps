@@ -28,6 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: compile
         run: |
+          chmod 755 gradlew
           ./gradlew clean build
 
       - name: upload artifact to JFrog
